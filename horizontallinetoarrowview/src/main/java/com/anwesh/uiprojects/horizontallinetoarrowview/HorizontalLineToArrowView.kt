@@ -216,4 +216,13 @@ class HorizontalLineToArrowView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : HorizontalLineToArrowView {
+            val view : HorizontalLineToArrowView = HorizontalLineToArrowView(activity)
+            activity.setContentView(view)
+            return view 
+        }
+    }
 }
