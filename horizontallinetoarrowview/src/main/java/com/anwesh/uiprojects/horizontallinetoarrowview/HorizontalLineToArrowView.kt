@@ -191,4 +191,26 @@ class HorizontalLineToArrowView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : HorizontalLineToArrowView) {
+
+        private val animator : Animator = Animator(view)
+        private val hlt : HorizontalLineArrow = HorizontalLineArrow(0)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(backColor)
+            hlt.draw(canvas, paint)
+            animator.animate {
+                hlt.update {i, scl ->
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            hlt.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
