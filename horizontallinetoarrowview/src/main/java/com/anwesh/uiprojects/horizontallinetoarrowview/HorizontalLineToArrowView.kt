@@ -36,7 +36,7 @@ fun Float.updateValue(dir : Float, a : Int, b : Int) : Float = mirrorValue(a, b)
 fun Canvas.drawRotLine(i : Int, size : Float, sc : Float, paint : Paint) {
     val sf : Float = 1f - 2 * i
     save()
-    rotate(rotDeg * sc * sf)
+    rotate(rotDeg * sc.divideScale(i, lines) * sf)
     drawLine(0f, 0f, size * sf, 0f, paint)
     restore()
 }
@@ -56,7 +56,7 @@ fun Canvas.drawHLTNode(i : Int, scale : Float, paint : Paint) {
     translate(w / 2, h / 2 - h / 2 * sc2 * sf)
     scale(1f, 1f - 2 * (i % 2))
     for (j in 0..(lines - 1)) {
-        drawRotLine(i, size, sc1, paint)
+        drawRotLine(j, size, sc1, paint)
     }
     restore()
 }
@@ -222,7 +222,7 @@ class HorizontalLineToArrowView(ctx : Context) : View(ctx) {
         fun create(activity : Activity) : HorizontalLineToArrowView {
             val view : HorizontalLineToArrowView = HorizontalLineToArrowView(activity)
             activity.setContentView(view)
-            return view 
+            return view
         }
     }
 }
